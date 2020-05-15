@@ -22,7 +22,7 @@ function* rootSaga() {
 function* fetchMovies() {
     try {
         const response = yield axios.get('/movies');
-        console.log('response of GET',response.data)
+        // console.log('response of GET', response.data) /* No longer needed */
         yield put({ type: 'SET_MOVIES', payload:response.data })
     }
     catch (error) {
@@ -33,7 +33,7 @@ function* fetchMovies() {
 function* fetchGenres() {
     try {
         const response = yield axios.get('/genres');
-        console.log('response of GET', response.data)
+        // console.log('response of GET', response.data) /* No longer needed */
         yield put({ type: 'SET_GENRES', payload: response.data })
     }
     catch (error) {

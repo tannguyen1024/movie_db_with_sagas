@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import MovieList from '../MovieList/MovieList'
 import { connect } from 'react-redux';
+import { HashRouter, Route } from 'react-router-dom';
+
+// Page Components Here
+import MovieList from '../MovieList/MovieList';
+import Details from '../Details/Details';
 
 class App extends Component {
 
@@ -10,7 +14,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('component did mounted')
+    console.log('Application has mounted.')
     this.props.dispatch({ type: 'FETCH_MOVIES' })
     this.props.dispatch({ type: 'FETCH_GENRES' })
   }
@@ -19,10 +23,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <header className="App-header"><button onClick={this.clickRedux}>Check Redux State</button></header>
-        <div className="App">
-          <MovieList />
-        </div>
+        <header className="App-header">
+          <button onClick={this.clickRedux}>Check Redux State</button>
+        </header>
+        <table className="App">
+          <HashRouter>
+            <Route exact path="/" component={MovieList} />
+            <Route path="/details" component={Details} />
+          </HashRouter>
+        </table>
       </div>
     );
   }
