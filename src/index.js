@@ -14,7 +14,31 @@ import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
+    yield takeEvery('FETCH_MOVIES', fetchMovies); // Receives initial call from component with TYPE
+    yield takeEvery('FETCH_GENRES', fetchGenres); // Receives initial call from component with TYPE
+}
 
+// Additional generator function
+function* fetchMovies() {
+    try {
+        const response = yield axios.get('/movies');
+        console.log('response of GET',response.data)
+        yield put({ type: 'SET_MOVIES', payload:response.data })
+    }
+    catch (error) {
+        console.log('Error in fetchMovies', error)
+    }
+}
+
+function* fetchGenres() {
+    try {
+        const response = yield axios.get('/genres');
+        console.log('response of GET', response.data)
+        yield put({ type: 'SET_GENRES', payload: response.data })
+    }
+    catch (error) {
+        console.log('Error in fetchMovies', error)
+    }
 }
 
 // Create sagaMiddleware
@@ -39,6 +63,8 @@ const genres = (state = [], action) => {
             return state;
     }
 }
+
+// Reducers
 
 // Create one store that all components can use
 const storeInstance = createStore(
