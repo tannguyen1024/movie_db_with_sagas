@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { HashRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 // Page Components Here
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
+import Edit from '../Edit/Edit'
 
 class App extends Component {
 
   clickRedux = () => {
     console.log('reduxState is:', this.props.reduxState);
+  }
+
+  home = () => {
+    this.props.history.push('/details')
   }
 
   componentDidMount() {
@@ -23,15 +28,19 @@ class App extends Component {
   render() {
     return (
       <div>
-        <header className="App-header">
-          <button onClick={this.clickRedux}>Check Redux State</button>
-        </header>
-        <table className="App">
-          <HashRouter>
+        <BrowserRouter>
+          <header className="App-header">
+            <button onClick={this.clickRedux}>Check Redux State</button><br/>
+            <button><Link to="/" homeOwner={this.state}>Home</Link></button>
+          </header>
+          <table className="App">
+
             <Route exact path="/" component={MovieList} />
             <Route path="/details" component={Details} />
-          </HashRouter>
-        </table>
+            <Route path="/edit" component={Edit} />
+
+          </table>
+        </BrowserRouter>
       </div>
     );
   }

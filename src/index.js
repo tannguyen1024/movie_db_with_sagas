@@ -19,11 +19,12 @@ function* rootSaga() {
 }
 
 // Additional generator function
+
 function* fetchMovies() {
     try {
         const response = yield axios.get('/movies');
         // console.log('response of GET', response.data) /* No longer needed */
-        yield put({ type: 'SET_MOVIES', payload:response.data })
+        yield put({ type: 'SET_MOVIES', payload: response.data })
     }
     catch (error) {
         console.log('Error in fetchMovies', error)
@@ -65,12 +66,21 @@ const genres = (state = [], action) => {
 }
 
 // Reducers
+const clickedMovie = (state = [], action) => {
+    switch (action.type) {
+        case 'CLICK_MOVIE':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        clickedMovie,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
@@ -79,6 +89,6 @@ const storeInstance = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
     document.getElementById('root'));
 registerServiceWorker();

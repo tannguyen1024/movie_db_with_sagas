@@ -4,17 +4,13 @@ import { connect } from 'react-redux';
 
 class MovieList extends Component {
 
-    handleClick = () => {
-        this.props.history.push('/details')
-    }
-
     render() {
         return (
             <>
                 <tbody><tr><td>MovieList</td></tr></tbody>
                 {/* MAP MOVIES HERE */}
                 {this.props.reduxState.movies.map(movies =>
-                    <tbody key={movies.id} onClick={this.handleClick}><MovieItem movies={movies} /></tbody>
+                    <tbody key={movies.id}><MovieItem movies={movies} history={this.props.history}/></tbody>
                 )}
             </>
         )
