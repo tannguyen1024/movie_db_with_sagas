@@ -15,7 +15,8 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies); // Receives initial call from component with TYPE
-    yield takeEvery('SET_GENRE', fetchCurrentGenre) // Receives initial call from component with TYPE
+    yield takeEvery('SET_GENRE', fetchCurrentGenre); // Receives initial call from component with TYPE
+    yield takeEvery('EDIT_CLICK', editMovie); // Receives initial call from component with TYPE
 }
 
 // Additional generator function
@@ -32,26 +33,27 @@ function* fetchMovies() {
 }
 
 function* fetchCurrentGenre(action) {
-    let id=action.payload;
+    let id = action.payload;
     try {
         const response = yield axios.get(`/genres/${id}`);
-        yield put({ type: 'SET_GENRES', payload: response.data});
+        yield put({ type: 'SET_GENRES', payload: response.data });
     }
     catch (error) {
         console.log('Error in fetchCurrentGenre', error)
     }
 }
 
-// function* fetchGenres() {
-//     try {
-//         const response = yield axios.get('/genres');
-//         // console.log('response of GET', response.data) /* No longer needed */
-//         yield put({ type: 'SET_GENRES', payload: response.data })
-//     }
-//     catch (error) {
-//         console.log('Error in fetchMovies', error)
-//     }
-// }
+function* editMovie(action) {
+    let movie = action.payload;
+    console.log('action.payload is:',movie);
+    try {
+        yield axios.put(`/movies/${movie.id}`, ({data: action.payload}))
+        yield put({ type: 'FETCH_MOVIES' });
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
