@@ -13,6 +13,17 @@ router.get('/', (req, res) => {
     }) // End Catch
 }) // END GET Route
 
+// GET Route for CLICKED Movie
+router.get('/:id', (req, res) => {
+    let queryText = `SELECT * FROM movies WHERE id = $1`;
+    pool.query(queryText, [req.params.id])
+        .then((result) => {
+            res.send(result.rows)
+        }).catch((error) => {
+            console.log(error);
+        }) // End Catch
+}) // END GET Route
+
 // PUT Route
 router.put('/:id', (req, res) => {
     let id = req.params.id;

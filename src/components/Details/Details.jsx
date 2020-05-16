@@ -16,21 +16,21 @@ class Details extends Component {
     render() {
         console.log('History is:', this.props.history)
         return (
-            <>
+            <div className="page">
                 <Button color="primary" variant="contained" onClick={this.home}>Return Home</Button> <Button color="secondary" variant="contained" onClick={this.handleClick}>Edit Movie</Button>
                 <tr>
-                    <td>NAME: {this.props.reduxState.clickedMovie.title}</td>
+                    {JSON.stringify(this.props.reduxState.clickedMovie2)}
+                    <td>NAME: {this.props.reduxState.clickedMovie2.title}</td>
                 </tr><br />
                 <tr>
-                    <td>DESCRIPTION: {this.props.reduxState.clickedMovie.description}</td>
+                    <td>DESCRIPTION: {this.props.reduxState.clickedMovie2.description}</td>
                 </tr><br />
                 <tr>
                     <td>GENRE: {this.props.reduxState.genres.map(movies => <span>{movies.name} </span>)}</td>
                 </tr>
-            </>
+            </div>
         )
     }
-
 }
 
 /* Choose one of the below*/

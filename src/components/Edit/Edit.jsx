@@ -11,25 +11,25 @@ class Edit extends Component {
 
     componentDidMount = () => {
         console.log(this.props.reduxState.genres);
-        // for (let i = 0; i < this.props.reduxState.genres.length; i++) {     /* This did not work for setting defaultChecked */
-        //     const name = this.props.reduxState.genres[i];
-        //     // console.log(name.name)
-        //     if (name.name === "Adventure") { this.setState({ ...this.state, adventure: "Yes" }) }
-        //     else if (name.name === "Animated") { this.setState({ ...this.state, animated: "Yes" }) }
-        //     else if (name.name === "Biographical") { this.setState({ ...this.state, biographical: "Yes" }) }
-        //     else if (name.name === "Comedy") { this.setState({ ...this.state, comedy: "Yes" }) }
-        //     else if (name.name === "Disaster") { this.setState({ ...this.state, disaster: "Yes" }) }
-        //     else if (name.name === "Drama") { this.setState({ ...this.state, drama: "Yes" }) }
-        //     else if (name.name === "Epic") { this.setState({ ...this.state, epic: "Yes" }) }
-        //     else if (name.name === "Fantasy") { this.setState({ ...this.state, fantasy: "Yes" }) }
-        //     else if (name.name === "Musical") { this.setState({ ...this.state, musical: "Yes" }) }
-        //     else if (name.name === "Romantic") { this.setState({ ...this.state, romantic: "Yes" }) }
-        //     else if (name.name === "Science Fiction") { this.setState({ ...this.state, science_fiction: "Yes" }) }
-        //     else if (name.name === "Soap Opera") { this.setState({ ...this.state, soap_opera: "Yes" }) }
-        //     else if (name.name === "Superhero") { this.setState({ ...this.state, superhero: "Yes" }) }
-        //     else { console.log(`It's NOT animated!`)}
-        //     console.log (this.state);
-        // }
+        for (let i = 0; i < this.props.reduxState.genres.length; i++) {     /* This did not work for setting defaultChecked */
+            const name = this.props.reduxState.genres[i];
+            // console.log(name.name)
+            if (name.name === "Adventure") { this.setState({ ...this.state, adventure: "Yes" }) }
+            else if (name.name === "Animated") { this.setState({ ...this.state, animated: "Yes" }) }
+            else if (name.name === "Biographical") { this.setState({ ...this.state, biographical: "Yes" }) }
+            else if (name.name === "Comedy") { this.setState({ ...this.state, comedy: "Yes" }) }
+            else if (name.name === "Disaster") { this.setState({ ...this.state, disaster: "Yes" }) }
+            else if (name.name === "Drama") { this.setState({ ...this.state, drama: "Yes" }) }
+            else if (name.name === "Epic") { this.setState({ ...this.state, epic: "Yes" }) }
+            else if (name.name === "Fantasy") { this.setState({ ...this.state, fantasy: "Yes" }) }
+            else if (name.name === "Musical") { this.setState({ ...this.state, musical: "Yes" }) }
+            else if (name.name === "Romantic") { this.setState({ ...this.state, romantic: "Yes" }) }
+            else if (name.name === "Science Fiction") { this.setState({ ...this.state, science_fiction: "Yes" }) }
+            else if (name.name === "Soap Opera") { this.setState({ ...this.state, soap_opera: "Yes" }) }
+            else if (name.name === "Superhero") { this.setState({ ...this.state, superhero: "Yes" }) }
+            else { console.log(`It's NOT animated!`)}
+            console.log (this.state);
+        }
     }
 
     handleChange = (event) => {
@@ -50,7 +50,8 @@ class Edit extends Component {
         console.log(this.state)
         return (
             <>
-                <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br/>
+                <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> 
+                <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br/>
                 <TextField onChange={this.handleChange} type="text" variant="outlined" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /><br />
                 <TextField onChange={this.handleChange2} type="text" variant="outlined" fullWidth={true} multiline={true} placeholder="Movie Description" defaultValue={this.props.reduxState.clickedMovie.description} /><br />
 

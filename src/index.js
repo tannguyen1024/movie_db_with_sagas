@@ -11,15 +11,26 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
+import {BrowserRouter, Route} from "react-router-dom";
 
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies); // Receives initial call from component with TYPE
     yield takeEvery('SET_GENRE', fetchCurrentGenre); // Receives initial call from component with TYPE
     yield takeEvery('EDIT_CLICK', editMovie); // Receives initial call from component with TYPE
+    yield takeEvery('GET_CLICK', getClick);
 }
 
 // Additional generator function
+
+function* getClick(action){
+    try{
+        let movie = action.payload;
+        const response = yield axios.get(`/movies/${movie.id}`);
+        yield put({type: 'GET_CLICKED', payload: response.data})
+    }
+    catch{}
+}
 
 function* fetchMovies() {
     try {
@@ -86,12 +97,20 @@ const clickedMovie = (state = [], action) => {
     else { return state }
 }
 
+const clickedMovie2 = (state =[], action) =>{
+    if(action.type === 'GET_CLICKED'){
+        return action.payload;
+    }
+    else{return state}
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
         clickedMovie,
+        clickedMovie2
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
@@ -100,6 +119,6 @@ const storeInstance = createStore(
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>,
+ReactDOM.render(<Provider store={storeInstance}><BrowserRouter><Route path="/" component={App} /></BrowserRouter></Provider>,
     document.getElementById('root'));
 registerServiceWorker();

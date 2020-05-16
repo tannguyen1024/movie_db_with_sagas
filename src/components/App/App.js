@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // Page Components Here
 import MovieList from '../MovieList/MovieList';
@@ -24,14 +25,23 @@ class App extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
-          <header className="App-header">
-            <button onClick={this.clickRedux}>Check Redux State</button><br/>
-          </header>
-            <Route exact path="/" component={MovieList} />
-            <Route path="/details" component={Details} />
-            <Route path="/edit" component={Edit} />
-        </BrowserRouter>
+        {/* <header className="App-header">
+          <button onClick={this.clickRedux}>Check Redux State</button><br />
+        </header> */}
+          <Route render={({location}) => (
+            <TransitionGroup>
+            <CSSTransition key={location.key} timeout={450} classNames="fade">
+
+                <Switch location={location}>
+                  <Route exact path="/" component={MovieList} />
+                  <Route path="/details" component={Details} />
+                  <Route path="/edit" component={Edit} />
+                </Switch>
+
+              </CSSTransition>
+            </TransitionGroup>
+          )} />
+
       </div>
     );
   }
