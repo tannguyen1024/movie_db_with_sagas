@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button } from '@material-ui/core';
 
 class Details extends Component {
 
@@ -16,7 +17,7 @@ class Details extends Component {
         console.log('History is:', this.props.history)
         return (
             <>
-                <button onClick={this.home}>Return Home</button> <button onClick={this.handleClick}>Edit Movie</button>
+                <Button color="primary" variant="contained" onClick={this.home}>Return Home</Button> <Button color="secondary" variant="contained" onClick={this.handleClick}>Edit Movie</Button>
                 <tr>
                     <td>NAME: {this.props.reduxState.clickedMovie.title}</td>
                 </tr><br />

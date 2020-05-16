@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TextField, Checkbox, FormControlLabel } from '@material-ui/core';
+import { Button, TextField, Checkbox, FormControlLabel } from '@material-ui/core';
 
 class Edit extends Component {
     state = { id: this.props.reduxState.clickedMovie.id, title: this.props.reduxState.clickedMovie.title, description: this.props.reduxState.clickedMovie.description}
+
+    cancel = () => {
+        this.props.history.push('/details')
+    }
 
     componentDidMount = () => {
         console.log(this.props.reduxState.genres);
@@ -46,6 +50,7 @@ class Edit extends Component {
         console.log(this.state)
         return (
             <>
+                <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br/>
                 <TextField onChange={this.handleChange} type="text" variant="outlined" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /><br />
                 <TextField onChange={this.handleChange2} type="text" variant="outlined" fullWidth={true} multiline={true} placeholder="Movie Description" defaultValue={this.props.reduxState.clickedMovie.description} /><br />
 
@@ -64,7 +69,6 @@ class Edit extends Component {
                 <FormControlLabel control={<Checkbox  value="Soap Opera" color="primary" />} label="Soap Opera" />
                 <FormControlLabel control={<Checkbox  value="Superhero" color="primary" />} label="Superhero" />
                 <br />
-                <button onClick={this.handleSubmit}>Submit Changes</button>
             </>
         )
     }
