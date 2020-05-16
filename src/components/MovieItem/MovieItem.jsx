@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 class MovieItem extends Component {
 
     handleClick = () => {
-        this.props.dispatch({type: 'GET_CLICK', payload: this.props.movies})
+        this.props.dispatch({type: 'POST_CLICK', payload:this.props.movies})
+        // this.props.dispatch({type: 'GET_CLICK', payload: this.props.movies})
         this.props.dispatch({ type: 'SET_GENRE', payload: this.props.movies.id })
         this.props.history.push('/details')
     }

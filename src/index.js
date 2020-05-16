@@ -18,15 +18,24 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMovies); // Receives initial call from component with TYPE
     yield takeEvery('SET_GENRE', fetchCurrentGenre); // Receives initial call from component with TYPE
     yield takeEvery('EDIT_CLICK', editMovie); // Receives initial call from component with TYPE
+    yield takeEvery('POST_CLICK', postClick);
     yield takeEvery('GET_CLICK', getClick);
 }
 
 // Additional generator function
 
+function* postClick(action){
+    try{
+        yield axios.post(`/click`, ({ data: action.payload }))
+        yield put({type: 'GET_CLICKED'})
+    }
+    catch (error){console.log(error)}
+}
+
 function* getClick(action){
     try{
         let movie = action.payload;
-        const response = yield axios.get(`/movies/${movie.id}`);
+        const response = yield axios.get(`/click`);
         yield put({type: 'GET_CLICKED', payload: response.data})
     }
     catch{}
