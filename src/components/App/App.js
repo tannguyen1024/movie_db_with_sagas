@@ -10,12 +10,8 @@ import Edit from '../Edit/Edit'
 
 class App extends Component {
 
-  clickRedux = () => {
+  clickRedux = () => { /* Button to perform check of the current redux State */
     console.log('reduxState is:', this.props.reduxState);
-  }
-
-  home = () => {
-    this.props.history.push('/details')
   }
 
   componentDidMount() {
@@ -31,7 +27,6 @@ class App extends Component {
         <BrowserRouter>
           <header className="App-header">
             <button onClick={this.clickRedux}>Check Redux State</button><br/>
-            <button><Link to="/">Home</Link></button>
           </header>
             <Route exact path="/" component={MovieList} />
             <Route path="/details" component={Details} />
