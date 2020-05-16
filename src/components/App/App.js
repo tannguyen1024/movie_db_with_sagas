@@ -31,7 +31,7 @@ class App extends Component {
         <BrowserRouter>
           <header className="App-header">
             <button onClick={this.clickRedux}>Check Redux State</button><br/>
-            <button><Link to="/" homeOwner={this.state}>Home</Link></button>
+            <button><Link to="/">Home</Link></button>
           </header>
             <Route exact path="/" component={MovieList} />
             <Route path="/details" component={Details} />
