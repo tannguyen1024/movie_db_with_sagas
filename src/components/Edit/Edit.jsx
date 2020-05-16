@@ -7,8 +7,8 @@ class Edit extends Component {
     render(){
         return(
             <>
-                <Input type="text" multiline={true} placeholder="title" value={this.props.reduxState.clickedMovie.title}/><br/>
-                <Input type="text" multiline={true} placeholder="description" value={this.props.reduxState.clickedMovie.description}/><br/>
+                <Input type="text" fullWidth={true} multiline={true} placeholder="title" value={this.props.reduxState.clickedMovie.title}/><br/>
+                <Input type="text" fullWidth={true} multiline={true} placeholder="description" value={this.props.reduxState.clickedMovie.description}/><br/>
             <label>Genre</label><select>
                     <option></option>
                     <option>Adventure</option>

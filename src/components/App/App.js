@@ -21,7 +21,7 @@ class App extends Component {
   componentDidMount() {
     console.log('Application has mounted.')
     this.props.dispatch({ type: 'FETCH_MOVIES' })
-    this.props.dispatch({ type: 'FETCH_GENRES' })
+    // this.props.dispatch({ type: 'FETCH_GENRES' })
   }
 
   // Renders the entire app on the DOM
