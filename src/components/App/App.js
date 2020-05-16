@@ -33,13 +33,9 @@ class App extends Component {
             <button onClick={this.clickRedux}>Check Redux State</button><br/>
             <button><Link to="/" homeOwner={this.state}>Home</Link></button>
           </header>
-          <table className="App">
-
             <Route exact path="/" component={MovieList} />
             <Route path="/details" component={Details} />
             <Route path="/edit" component={Edit} />
-
-          </table>
         </BrowserRouter>
       </div>
     );
