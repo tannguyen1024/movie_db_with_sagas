@@ -11,7 +11,7 @@ class Header extends Component {
     render(){
         return(
             <header className="App-header">
-                <Button onClick={this.home} size="large" color="primary">⚐ HOME</Button>
+                <Button onClick={this.home} size="large" color="primary" variant="contained">⚐ HOME</Button>
             </header>
         )
     }

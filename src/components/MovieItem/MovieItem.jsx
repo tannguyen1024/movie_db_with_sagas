@@ -12,7 +12,7 @@ class MovieItem extends Component {
         // this.props.dispatch({type: 'POST_CLICK', payload:this.props.movies}) /* Posts ALL the information about the movie to DATABASE for POST */
         this.props.dispatch({ type: 'STORE_CLICK', payload: this.props.movies }) /* Posts ALL the information about the movie to reducer for ALTERNATE method of DETAILS */
         this.props.dispatch({ type: 'SET_GENRE', payload: this.props.movies.id }) /* Sets the current genre for the clicked item in reducer */
-        this.props.history.push('/details')
+        this.props.history.push('/details') /* Utilizes BrowserRouter to navigate to the details page */
     }
 
     render() {

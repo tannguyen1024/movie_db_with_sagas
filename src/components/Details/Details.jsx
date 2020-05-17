@@ -23,7 +23,7 @@ class Details extends Component {
         // console.log('History is:', this.props.history) /* No longer needed */
         return (<>
             <Container style={{ margin: "50px 25px 25px 25px" }}>
-                <Card className="text-center">
+                <Card style={{ boxShadow: "1px 1px 15px  #000000" }} className="text-center">
                     <Card.Header><img src={this.props.reduxState.clickedMovie.poster}/></Card.Header>
                     <Card.Body>
                         <Card.Title>{this.props.reduxState.clickedMovie.title}</Card.Title>

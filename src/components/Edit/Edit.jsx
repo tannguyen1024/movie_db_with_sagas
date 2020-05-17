@@ -50,8 +50,8 @@ class Edit extends Component {
         return (
             <>
                 <Container style={{ margin: "50px 25px 25px 25px" }}>
-                    <Card className="text-center">
-                        <Card.Header><img src={this.props.reduxState.clickedMovie.poster} /></Card.Header>
+                    <Card style={{ boxShadow: "1px 1px 15px  #000000" }} className="text-center">
+                        <Card.Header style={{ opacity: "0.5" }}><img src={this.props.reduxState.clickedMovie.poster} /></Card.Header>
                         <Card.Body>
                             <Card.Title><Input onChange={this.handleChange} type="text" variant="contained" color="secondary" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /></Card.Title>
                             <Card.Text>
