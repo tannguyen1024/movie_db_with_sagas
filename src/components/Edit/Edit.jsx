@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, TextField, FormControlLabel } from '@material-ui/core';
-import { Container } from '@material-ui/core';
 import axios from 'axios';
 
 class Edit extends Component {
@@ -49,7 +48,6 @@ class Edit extends Component {
     render() {
         return (
             <>
-            <Container maxWidth="sm">
                 <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br/>
                 <p><Input onChange={this.handleChange} type="text" variant="contained" color="secondary" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /></p>
                 <TextField onChange={this.handleChange2} type="text" variant="outlined" fullWidth={true} multiline={true} placeholder="Movie Description" defaultValue={this.props.reduxState.clickedMovie.description} /><br />
@@ -71,7 +69,6 @@ class Edit extends Component {
                 <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.superhero} value="Superhero" color="primary" />} label="Superhero" />
             
                 <br />
-                </Container>
             </>
         )
     }
