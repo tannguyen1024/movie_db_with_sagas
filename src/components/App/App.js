@@ -32,7 +32,7 @@ class App extends Component {
                   <Route exact path="/" component={MovieList} />
                   <Route path="/details" component={Details} />
                   <Route path="/edit" component={Edit} />
-                </Switch>
+                </Switch>  
 
               </CSSTransition>
             </TransitionGroup>
@@ -42,6 +42,8 @@ class App extends Component {
     );
   }
 }
+
+{/* It was not transitions that are breaking the POST/GET of DETAILS */}
 
 const myReduxState = (reduxState) => ({ reduxState });
 export default connect(myReduxState)(App);
