@@ -29,7 +29,6 @@ const myTheme = createMuiTheme({
 });
 
 class App extends Component {
-
   // clickRedux = () => { /* Button to perform check of the current redux State */
   //   console.log('reduxState is:', this.props.reduxState);
   // }
@@ -47,17 +46,14 @@ class App extends Component {
         <Route render={({ location }) => (
           <TransitionGroup>
             <CSSTransition key={location.key} timeout={300} classNames="fade">
-
               <Switch location={location}>
-                  
                   <Route exact path="/" component={MovieList} />
                   <Route path="/details" component={Details} />
                   <Route path="/edit" component={Edit} />
               </Switch>
-
             </CSSTransition>
           </TransitionGroup>
-        )} />
+        )}/>
       </MuiThemeProvider>
     );
   }
