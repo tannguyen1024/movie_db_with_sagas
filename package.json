@@ -6,8 +6,10 @@
   "dependencies": {
     "@material-ui/core": "^4.9.14",
     "axios": "^0.18.1",
+    "bootstrap": "^4.5.0",
     "pg": "^7.18.2",
     "react": "^16.13.0",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.0",
     "react-redux": "^5.1.2",
     "react-scripts": "^3.4.0",

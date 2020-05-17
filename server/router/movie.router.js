@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
     let id = req.params.id;
     let queryText = `UPDATE "movies" SET title=$2, description=$3 WHERE id=$1;`;
-    pool.query(queryText, [id, req.body.data.title, req.body.data.description])
+    pool.query(queryText, [id, req.body.title, req.body.description])
         .then((result) => {
             res.sendStatus(200)
         }).catch((error) => {

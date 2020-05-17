@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+// Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
+
 // Page Components Here
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
@@ -14,7 +18,6 @@ import 'typeface-roboto';
 import { MuiThemeProvider } from '@material-ui/core/';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { purple, amber } from '@material-ui/core/colors';
-import { sizing } from '@material-ui/system';
 
 const myTheme = createMuiTheme({
   palette: {
@@ -39,28 +42,28 @@ class App extends Component {
   // Renders the entire app on the DOM
   render() {
     return (
-      <div>
-        <MuiThemeProvider theme={myTheme}>
-          <Route render={({location}) => (
-            <TransitionGroup>
+      <MuiThemeProvider theme={myTheme}>
+        <Route render={({ location }) => (
+          <TransitionGroup>
             <CSSTransition key={location.key} timeout={450} classNames="fade">
 
-                <Switch location={location}>
+              <Switch location={location}>
+                <Container>
                   <Route exact path="/" component={MovieList} />
                   <Route path="/details" component={Details} />
                   <Route path="/edit" component={Edit} />
-                </Switch>  
+                </Container>
+              </Switch>
 
-              </CSSTransition>
-            </TransitionGroup>
-          )} />
-        </MuiThemeProvider>
-      </div>
+            </CSSTransition>
+          </TransitionGroup>
+        )} />
+      </MuiThemeProvider>
     );
   }
 }
 
-{/* It was not transitions that are breaking the POST/GET of DETAILS */}
+{/* It was not transitions that are breaking the POST/GET of DETAILS */ }
 
 const myReduxState = (reduxState) => ({ reduxState });
 export default connect(myReduxState)(App);

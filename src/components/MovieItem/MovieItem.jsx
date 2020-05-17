@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 // import axios from 'axios'; /* No longer needed */
 
+// Bootstrap
+import { Container, Card } from 'react-bootstrap';
+
 class MovieItem extends Component {
 
     handleClick = () => {
@@ -14,11 +17,11 @@ class MovieItem extends Component {
     render(){
         // console.log('MovieItem:',this.props.movies) /* No Longer Needed */
         return(
-            <tr onClick={this.handleClick}>
-                    <td><img src={this.props.movies.poster} alt=""/></td>
+            <Card.Body onClick={this.handleClick}>
+                <Card.Img variant="left" src={this.props.movies.poster} />
                     <td>{this.props.movies.title}</td>
                     <td>{this.props.movies.description}</td>
-            </tr>
+            </Card.Body>
         )
     }
 
