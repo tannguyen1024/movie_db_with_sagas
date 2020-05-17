@@ -6,11 +6,11 @@ const pool = require('../modules/pool');
 router.get('/', (req, res) => {
     let queryText = `SELECT * FROM "detail" ORDER by id DESC LIMIT 1;`;
     pool.query(queryText)
-    .then((result) => {
-        res.send(result.rows)
-    }).catch((error) => {
-        console.log(error);
-    }) // End Catch
+        .then((result) => {
+            res.send(result.rows)
+        }).catch((error) => {
+            console.log(error);
+        }) // End Catch
 }) // END GET Route
 
 // POST Route
@@ -25,5 +25,17 @@ router.post('/', (req, res) => {
             res.sendStatus(500);
         }) // End Catch
 }) // END POST Route
+
+// DELETE Route
+router.delete('/', (req, res) => {
+    let queryText = `DELETE FROM "detail";`;
+    pool.query(queryText)
+        .then((result) => {
+            res.sendStatus(200)
+        }).catch((error) => {
+            console.log(`An error has occurred`, error);
+            res.sendStatus(500);
+        }) // End Catch
+}) // END DELETE Route
 
 module.exports = router;

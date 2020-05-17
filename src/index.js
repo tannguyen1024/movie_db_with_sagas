@@ -26,11 +26,11 @@ function* rootSaga() {
 
 function* postClick(action){
     try{
-        yield axios.post(`/click`, ({ data: action.payload }))
+        axios.post(`/click`, ({ data: action.payload }))
         yield put({type: 'GET_CLICKED'})
     }
     catch (error){console.log(error)}
-}
+} 
 
 function* getClick(action){
     try{
@@ -56,7 +56,7 @@ function* fetchCurrentGenre(action) {
     let id = action.payload;
     try {
         const response = yield axios.get(`/genres/${id}`);
-        yield put({ type: 'SET_GENRES', payload: response.data });
+        yield put({ type: 'UPDATE_GENRES', payload: response.data });
     }
     catch (error) {
         console.log('Error in fetchCurrentGenre', error)
@@ -91,7 +91,7 @@ const movies = (state = [], action) => {
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
-        case 'SET_GENRES':
+        case 'UPDATE_GENRES':
             return action.payload;
         default:
             return state;
@@ -113,9 +113,20 @@ const clickedMovie2 = (state =[], action) =>{
     else{return state}
 }
 
+
+function* deleteClick(action) {
+    if (action.type === "DELETE_CLICK")
+       {
+        axios.delete(`/click`);
+        return
+     }
+        else{return}
+}       
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
+        deleteClick,
         movies,
         genres,
         clickedMovie,

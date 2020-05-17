@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
+import axios from 'axios';
 
 class Details extends Component {
 
@@ -9,12 +10,13 @@ class Details extends Component {
     }
 
     handleClick = () => {
-        console.log('handleClick with:', this.props.reduxState.clickedMovie);
+        this.props.dispatch({ type: 'GET_CLICK' })
         this.props.history.push('/edit')
     }
 
     home = () => {
-        this.props.history.push('/')
+        axios.delete(`/click`);
+        this.props.history.push('/');
     }
 
     render() {
