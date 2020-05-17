@@ -7,7 +7,23 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 // Page Components Here
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
-import Edit from '../Edit/Edit'
+import Edit from '../Edit/Edit';
+
+// Material UI
+import 'typeface-roboto';
+import { MuiThemeProvider } from '@material-ui/core/';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { purple, amber } from '@material-ui/core/colors';
+import { sizing } from '@material-ui/system';
+
+const myTheme = createMuiTheme({
+  palette: {
+    primary: purple,
+    secondary: {
+      main: amber[800]
+    }
+  }
+});
 
 class App extends Component {
 
@@ -24,6 +40,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <MuiThemeProvider theme={myTheme}>
           <Route render={({location}) => (
             <TransitionGroup>
             <CSSTransition key={location.key} timeout={450} classNames="fade">
@@ -37,7 +54,7 @@ class App extends Component {
               </CSSTransition>
             </TransitionGroup>
           )} />
-
+        </MuiThemeProvider>
       </div>
     );
   }
