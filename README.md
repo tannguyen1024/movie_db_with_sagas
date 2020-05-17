@@ -1,7 +1,8 @@
 # Tan's Magnificent Movie Database
 
-Completed May 17th, 2020
-by Tan Van Nguyen
+-Started May 14th, 2020
+-Completed May 17th, 2020
+-by Tan Van Nguyen
 
 ## Technology utilized
 
