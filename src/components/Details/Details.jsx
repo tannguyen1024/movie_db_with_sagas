@@ -15,7 +15,7 @@ class Details extends Component {
     }
 
     home = () => {
-        axios.delete(`/click`); /* Deletes the entire DETAILS database */
+        // axios.delete(`/click`); /* Deletes the entire DETAILS database */
         this.props.history.push('/'); /* Utilizes React Router to transition to home page */
     }
 

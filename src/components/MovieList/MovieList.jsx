@@ -3,7 +3,7 @@ import MovieItem from '../MovieItem/MovieItem';
 import { connect } from 'react-redux';
 
 // Bootstrap
-import { Container, Card, CardColumns } from 'react-bootstrap';
+// import { Container, Card, CardColumns } from 'react-bootstrap';
 
 class MovieList extends Component {
 

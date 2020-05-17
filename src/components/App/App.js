@@ -12,6 +12,7 @@ import { Container } from 'react-bootstrap';
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
 import Edit from '../Edit/Edit';
+import Header from '../Header/Header';
 
 // Material UI
 import 'typeface-roboto';
@@ -43,11 +44,13 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={myTheme}>
+        <Route path="/" component={Header} />
         <Route render={({ location }) => (
           <TransitionGroup>
             <CSSTransition key={location.key} timeout={250} classNames="fade">
 
               <Switch location={location}>
+                  
                   <Route exact path="/" component={MovieList} />
                   <Route path="/details" component={Details} />
                   <Route path="/edit" component={Edit} />
