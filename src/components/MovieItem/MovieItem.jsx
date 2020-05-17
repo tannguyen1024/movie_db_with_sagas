@@ -26,7 +26,7 @@ class MovieItem extends Component {
                         </Col>
                         <Col>
                             <Card style={{ boxShadow: "2px 2px 20px  #000000" }}>
-                                <Card.Header>{this.props.movies.title}<span style={{ float: "right" }}><Button variant="outline-dark" size="sm" onClick={this.handleClick}>Edit</Button></span></Card.Header>
+                                <Card.Header>{this.props.movies.title}<span style={{ float: "right" }}><Button variant="outline-dark" size="sm" onClick={this.handleClick}>Details</Button></span></Card.Header>
                                 <Card>{this.props.movies.description}</Card>
                             </Card>
                         </Col>

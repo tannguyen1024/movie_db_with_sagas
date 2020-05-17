@@ -17,13 +17,13 @@ import Edit from '../Edit/Edit';
 import 'typeface-roboto';
 import { MuiThemeProvider } from '@material-ui/core/';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { purple, amber } from '@material-ui/core/colors';
+import { blue, orange } from '@material-ui/core/colors';
 
 const myTheme = createMuiTheme({
   palette: {
-    primary: purple,
+    primary: blue,
     secondary: {
-      main: amber[800]
+      main: orange[500]
     }
   }
 });

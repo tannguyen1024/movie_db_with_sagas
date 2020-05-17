@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
+import { Card, Row, Col, Container } from 'react-bootstrap';
 
 class Details extends Component {
 
@@ -20,19 +21,21 @@ class Details extends Component {
 
     render() {
         // console.log('History is:', this.props.history) /* No longer needed */
-        return (
-            <div className="page">
-                <Button color="primary" variant="contained" onClick={this.home}>Back to List</Button> <Button color="secondary" variant="contained" onClick={this.handleClick}>Edit Movie</Button>
-                <tr>
-                    <td>NAME: {this.props.reduxState.clickedMovie.title}</td>
-                </tr><br />
-                <tr>
-                    <td>DESCRIPTION: {this.props.reduxState.clickedMovie.description}</td>
-                </tr><br />
-                <tr>
-                    <td>GENRE: {this.props.reduxState.genres.map(movies => <span>{movies.name} </span>)}</td>
-                </tr>
-            </div>
+        return (<>
+            <Container style={{ margin: "50px 25px 25px 25px" }}>
+                <Card className="text-center">
+                    <Card.Header><img src={this.props.reduxState.clickedMovie.poster}/></Card.Header>
+                    <Card.Body>
+                        <Card.Title>{this.props.reduxState.clickedMovie.title}</Card.Title>
+                        <Card.Text>
+                            {this.props.reduxState.clickedMovie.description}
+                        </Card.Text>
+                        <Button color="primary" variant="contained" onClick={this.home}>Back to List</Button> <Button color="secondary" variant="contained" onClick={this.handleClick}>Edit Movie</Button>
+                    </Card.Body>
+                    <Card.Footer className="text-muted">{this.props.reduxState.genres.map(movies => <span>{movies.name} </span>)}</Card.Footer>
+                </Card>
+            </Container>
+        </>
         )
     }
 }

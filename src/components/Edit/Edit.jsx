@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, TextField, FormControlLabel } from '@material-ui/core';
 // import axios from 'axios';
+import { Card, Row, Col, Container } from 'react-bootstrap';
 
 class Edit extends Component {
-    state = { id: this.props.reduxState.clickedMovie.id, title: this.props.reduxState.clickedMovie.title, description: this.props.reduxState.clickedMovie.description}
+    state = { id: this.props.reduxState.clickedMovie.id, title: this.props.reduxState.clickedMovie.title, description: this.props.reduxState.clickedMovie.description, poster: this.props.reduxState.clickedMovie.poster }
 
     cancel = () => {
         this.props.history.push('/details')
@@ -48,27 +49,33 @@ class Edit extends Component {
     render() {
         return (
             <>
-                <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br/>
-                <p><Input onChange={this.handleChange} type="text" variant="contained" color="secondary" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /></p>
-                <TextField onChange={this.handleChange2} type="text" variant="outlined" fullWidth={true} multiline={true} placeholder="Movie Description" defaultValue={this.props.reduxState.clickedMovie.description} /><br />
-
-                <h5>Genre</h5>
-                
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.adventure} value="Adventure" color="primary" />} label="Adventure" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.animated}  value="Animated" color="primary" />} label="Animated" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.biographical} value="Biographical" color="primary" />} label="Biographical" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.comedy} value="Comedy" color="primary" />} label="Comedy" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.disaster} value="Disaster" color="primary" />} label="Disaster" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.drama} value="Drama" color="primary" />} label="Drama" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.epic} value="Epic" color="primary" />} label="Epic" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.fantasy} value="Fantasy" color="primary" />} label="Fantasy" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.musical} value="Musical" color="primary" />} label="Musical" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.romantic} value="Romantic" color="primary" />} label="Romantic" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.science_fiction} value="Science Fiction" color="primary" />} label="Science Fiction" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.soap_opera} value="Soap Opera" color="primary" />} label="Soap Opera" />
-                <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.superhero} value="Superhero" color="primary" />} label="Superhero" />
-            
-                <br />
+                <Container style={{ margin: "50px 25px 25px 25px" }}>
+                    <Card className="text-center">
+                        <Card.Header><img src={this.props.reduxState.clickedMovie.poster} /></Card.Header>
+                        <Card.Body>
+                            <Card.Title><Input onChange={this.handleChange} type="text" variant="contained" color="secondary" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /></Card.Title>
+                            <Card.Text>
+                                <TextField onChange={this.handleChange2} type="text" variant="outlined" fullWidth={true} multiline={true} placeholder="Movie Description" defaultValue={this.props.reduxState.clickedMovie.description} />
+                            </Card.Text>
+                            <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br />
+                        </Card.Body>
+                        <Card.Footer className="text-muted">
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.adventure} value="Adventure" color="primary" />} label="Adventure" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.animated} value="Animated" color="primary" />} label="Animated" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.biographical} value="Biographical" color="primary" />} label="Biographical" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.comedy} value="Comedy" color="primary" />} label="Comedy" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.disaster} value="Disaster" color="primary" />} label="Disaster" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.drama} value="Drama" color="primary" />} label="Drama" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.epic} value="Epic" color="primary" />} label="Epic" /><br/>
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.fantasy} value="Fantasy" color="primary" />} label="Fantasy" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.musical} value="Musical" color="primary" />} label="Musical" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.romantic} value="Romantic" color="primary" />} label="Romantic" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.science_fiction} value="Science Fiction" color="primary" />} label="Science Fiction" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.soap_opera} value="Soap Opera" color="primary" />} label="Soap Opera" />
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.superhero} value="Superhero" color="primary" />} label="Superhero" />
+            </Card.Footer>
+                    </Card>
+                </Container>
             </>
         )
     }
