@@ -17,6 +17,7 @@ class MovieItem extends Component {
 
     render() {
         // console.log('MovieItem:',this.props.movies) /* No Longer Needed */
+        console.log(this.props.movies.genre)
         return (
             <>
                 <Container style={{margin: "50px 25px 25px 25px"}}>
@@ -28,6 +29,7 @@ class MovieItem extends Component {
                             <Card style={{ boxShadow: "2px 2px 20px  #000000" }}>
                                 <Card.Header>{this.props.movies.title}<span style={{ float: "right" }}><Button variant="outline-dark" size="sm" onClick={this.handleClick}>Details</Button></span></Card.Header>
                                 <Card>{this.props.movies.description}</Card>
+                                <Card.Footer className="text-muted" style={{ textAlign: "center" }}><span>{this.props.movies.genre.join(', ')}</span></Card.Footer>
                             </Card>
                         </Col>
                     </Row>
