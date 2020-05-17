@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
@@ -19,7 +19,7 @@ function* rootSaga() {
     yield takeEvery('SET_GENRE', fetchCurrentGenre); // SAGAS which sets the current genre from clicked item
     yield takeEvery('EDIT_CLICK', editMovie); // RECEIVES the ONCHANGE information //
     yield takeEvery('POST_CLICK', postClick); // SAGAS with Initial Click of Movie
-    yield takeEvery('GET_CLICK', getClick); // SAGAS with componentDidMount of Details page
+    // yield takeEvery('GET_CLICK', getClick); // SAGAS with componentDidMount of Details page
 }
 
 // Additional generator function
@@ -43,13 +43,13 @@ function* postClick(action){
     catch (error){console.log(error)}
 } 
 
-function* getClick(action){ /* RUNS once componentDidMount of Details loads */
-    try{
-        const response = yield axios.get(`/click`);
-        yield put({type: 'SET_CLICKED', payload: response.data}) /* Sends response.data as payload to reducer */
-    }
-    catch{}
-}
+// function* getClick(action){ /* RUNS once componentDidMount of Details loads */
+//     try{
+//         const response = yield axios.get(`/click`);
+//         yield put({type: 'SET_CLICKED', payload: response.data}) /* Sends response.data as payload to reducer */
+//     }
+//     catch{}
+// } /* No longer needed */
 
 function* fetchCurrentGenre(action) {
     let id = action.payload;
@@ -100,39 +100,37 @@ const genres = (state = [], action) => {
 // Reducers
 const clickedMovie = (state = [], action) => {
     if (action.type === 'STORE_CLICK') {
-        return action.payload;
+        return action.payload; /*  this.props.reduxState.clickedMovie.id */
     }
     else { return state }
 }
 
-const clickedMovie2 = (state = [], action) =>{
-    if(action.type === 'SET_CLICKED'){
-        return action.payload; /* Passes clicked database result.rows back as reduxState.clickedMovie2 */
-    }
-    else{return state}
-}
+// const clickedMovie2 = (state = [], action) =>{  /* No longer needed */
+//     if(action.type === 'SET_CLICKED'){
+//         return action.payload; /* Passes clicked database result.rows back as reduxState.clickedMovie2 */
+//     }
+//     else{return state}
+// }
 
 
-function* deleteClick(action) {
-    if (action.type === "DELETE_CLICK")
-       {
-        axios.delete(`/click`);
-        return
-     }
-        else{return}
-}       
+// function* deleteClick(action) {  /* No longer needed */
+//     if (action.type === "DELETE_CLICK")
+//        {
+//         axios.delete(`/click`);
+//         return
+//      }
+//         else{return}
+// }       
 
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
-        deleteClick,
         movies,
         genres,
         clickedMovie,
-        clickedMovie2
     }),
     // Add sagaMiddleware to our store
-    applyMiddleware(sagaMiddleware, logger),
+    applyMiddleware(sagaMiddleware), /* REMOVED LOGGER for better visibility of Console */
 );
 
 // Pass rootSaga into our sagaMiddleware

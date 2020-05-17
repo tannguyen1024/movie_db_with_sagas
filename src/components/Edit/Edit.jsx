@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, TextField, Checkbox, FormControlLabel } from '@material-ui/core';
+import { Button, Input, TextField, Checkbox, FormControlLabel } from '@material-ui/core';
 import axios from 'axios';
 
 class Edit extends Component {
@@ -45,16 +45,16 @@ class Edit extends Component {
         console.log('Submitting State:', this.state)
         axios.delete(`/click`) /* Deletes the entire DETAILS database */
         this.props.dispatch({ type: 'EDIT_CLICK', payload: this.state }) /* Pushes up the current state to SAGAS */
-        this.props.history.push('/')
+        this.props.dispatch({ type: 'STORE_CLICK', payload: this.state }) 
+        this.props.history.push('/details')
     }
 
     render() {
-        console.log(this.state)
         return (
             <>
                 <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> 
                 <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br/>
-                <TextField onChange={this.handleChange} type="text" variant="outlined" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /><br />
+                <p><Input onChange={this.handleChange} type="text" variant="contained" color="secondary" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /></p>
                 <TextField onChange={this.handleChange2} type="text" variant="outlined" fullWidth={true} multiline={true} placeholder="Movie Description" defaultValue={this.props.reduxState.clickedMovie.description} /><br />
 
                 <h5>Genre</h5>

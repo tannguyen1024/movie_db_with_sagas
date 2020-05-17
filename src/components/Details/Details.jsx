@@ -22,7 +22,7 @@ class Details extends Component {
         // console.log('History is:', this.props.history) /* No longer needed */
         return (
             <div className="page">
-                <Button color="primary" variant="contained" onClick={this.home}>Return Home</Button> <Button color="secondary" variant="contained" onClick={this.handleClick}>Edit Movie</Button>
+                <Button color="primary" variant="contained" onClick={this.home}>Back to List</Button> <Button color="secondary" variant="contained" onClick={this.handleClick}>Edit Movie</Button>
                 <tr>
                     <td>NAME: {this.props.reduxState.clickedMovie.title}</td>
                 </tr><br />
