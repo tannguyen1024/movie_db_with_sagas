@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, TextField, FormControlLabel } from '@material-ui/core';
-// import axios from 'axios';
 import { Card, Row, Col, Container } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 class Edit extends Component {
     state = { id: this.props.reduxState.clickedMovie.id, title: this.props.reduxState.clickedMovie.title, description: this.props.reduxState.clickedMovie.description, poster: this.props.reduxState.clickedMovie.poster }
@@ -39,11 +39,28 @@ class Edit extends Component {
     }
 
     handleSubmit = () => {
-        // console.log('Submitting State:', this.state)
-        // axios.delete(`/click`) /* Deletes the entire DETAILS database */  /* No longer used due to issues with page not loading properly */
-        this.props.dispatch({ type: 'EDIT_CLICK', payload: this.state }) /* Pushes up the current state to SAGAS */
-        this.props.dispatch({ type: 'STORE_CLICK', payload: this.state }) /* Store our item in reducer for DETAILS later*/
-        this.props.history.push('/details') /* Utilizes BrowserRouter to navigate to the details page */
+        Swal.fire({
+            title: 'Are you certain',
+            text: "of those changes?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.value) {
+                // console.log('Submitting State:', this.state)
+                // axios.delete(`/click`) /* Deletes the entire DETAILS database */  /* No longer used due to issues with page not loading properly */
+                this.props.dispatch({ type: 'EDIT_CLICK', payload: this.state }) /* Pushes up the current state to SAGAS */
+                this.props.dispatch({ type: 'STORE_CLICK', payload: this.state }) /* Store our item in reducer for DETAILS later*/
+                Swal.fire(
+                    'The movie has been updated.',
+                    'Returning to movie details.',
+                    'success'
+                )
+                this.props.history.push('/details') /* Utilizes BrowserRouter to navigate to the details page */
+            }
+        })
     }
 
     render() {
@@ -66,14 +83,14 @@ class Edit extends Component {
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.comedy} value="Comedy" color="primary" />} label="Comedy" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.disaster} value="Disaster" color="primary" />} label="Disaster" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.drama} value="Drama" color="primary" />} label="Drama" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.epic} value="Epic" color="primary" />} label="Epic" /><br/>
+                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.epic} value="Epic" color="primary" />} label="Epic" /><br />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.fantasy} value="Fantasy" color="primary" />} label="Fantasy" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.musical} value="Musical" color="primary" />} label="Musical" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.romantic} value="Romantic" color="primary" />} label="Romantic" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.science_fiction} value="Science Fiction" color="primary" />} label="Science Fiction" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.soap_opera} value="Soap Opera" color="primary" />} label="Soap Opera" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.superhero} value="Superhero" color="primary" />} label="Superhero" />
-            </Card.Footer>
+                        </Card.Footer>
                     </Card>
                 </Container>
             </>

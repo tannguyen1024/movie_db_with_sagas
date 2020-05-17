@@ -10,8 +10,9 @@ class Header extends Component {
 
     render(){
         return(
-            <header className="App-header">
+            <header className="App-header" style={{ boxShadow: "2px 2px 20px  #000000" }}>
                 <Button onClick={this.home} size="large" color="primary" variant="contained">⚐ HOME</Button>
+                <Button color="primary" size="large" style={{position: "absolute", left:"40%"}}>Magnificent Movie Database</Button>
             </header>
         )
     }
