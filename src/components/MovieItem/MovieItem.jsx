@@ -17,7 +17,7 @@ class MovieItem extends Component {
 
     render() {
         // console.log('MovieItem:',this.props.movies) /* No Longer Needed */
-        console.log(this.props.movies.genre)
+        // console.log(this.props.movies.genre) /* No Longer Needed */
         return (
             <>
                 <Container style={{margin: "50px 25px 25px 25px"}}>
