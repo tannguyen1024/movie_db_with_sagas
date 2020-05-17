@@ -36,4 +36,4 @@ This weekend project required me to create a full stack movie database that util
 
 ## Project Notes
 
-This project is the culmination of all of my coding education to this point.  While I am proud of my work, I feel that with more time, I could add a lot more functionality such as a password protected administrator page that allows a user to delete entries.  I ran into problems with Material UI and intend to do more research to integrate that into future projects.
+This project is the culmination of all of my coding education to this point.  While I am proud of my work, I feel that with more time, I could add a lot more functionality such as a password protected administrator page that allows a user to delete entries.  I ran into problems with Material UI and intend to do more research to integrate that into future projects.  I attempted to implement the ability to add and remove genres, but it works about 75% of the time.
