@@ -12,7 +12,7 @@ class MovieList extends Component {
         <>
             {/* MAP MOVIES HERE */}
             {this.props.reduxState.movies.map(movies =>
-                <MovieItem movies={movies} history={this.props.history} />
+                <div key={movies.id}><MovieItem movies={movies} history={this.props.history} /></div>
             )}
         </>
         )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, TextField, FormControlLabel } from '@material-ui/core';
-import { Card, Row, Col, Container } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
 class Edit extends Component {
@@ -38,6 +38,10 @@ class Edit extends Component {
         this.setState({ description: event.target.value })
     }
 
+    handleChange3 = (event) => {
+        console.log('Check is',event.target.checked)
+    }
+
     handleSubmit = () => {
         Swal.fire({
             title: 'Are you certain',
@@ -68,7 +72,7 @@ class Edit extends Component {
             <>
                 <Container style={{ margin: "50px 25px 25px 25px" }}>
                     <Card style={{ boxShadow: "1px 1px 15px  #000000" }} className="text-center">
-                        <Card.Header style={{ opacity: "0.5" }}><img src={this.props.reduxState.clickedMovie.poster} /></Card.Header>
+                        <Card.Header style={{ opacity: "0.5" }}><img alt="Movie Poster" src={this.props.reduxState.clickedMovie.poster} /></Card.Header>
                         <Card.Body>
                             <Card.Title><Input onChange={this.handleChange} type="text" variant="contained" color="secondary" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /></Card.Title>
                             <Card.Text>
@@ -77,7 +81,7 @@ class Edit extends Component {
                             <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br />
                         </Card.Body>
                         <Card.Footer className="text-muted">
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.adventure} value="Adventure" color="primary" />} label="Adventure" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange} defaultChecked={this.state.adventure} value="Adventure" color="primary" />} label="Adventure" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.animated} value="Animated" color="primary" />} label="Animated" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.biographical} value="Biographical" color="primary" />} label="Biographical" />
                             <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.comedy} value="Comedy" color="primary" />} label="Comedy" />

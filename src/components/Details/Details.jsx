@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
-import axios from 'axios';
-import { Card, Row, Col, Container } from 'react-bootstrap';
+// import axios from 'axios';
+import { Card, Container } from 'react-bootstrap';
 
 class Details extends Component {
 
@@ -32,7 +32,7 @@ class Details extends Component {
                         </Card.Text>
                         <Button color="primary" variant="contained" onClick={this.home}>Back to List</Button> <Button color="secondary" variant="contained" onClick={this.handleClick}>Edit Movie</Button>
                     </Card.Body>
-                    <Card.Footer className="text-muted">{this.props.reduxState.genres.map(movies => <span>{movies.name} </span>)}</Card.Footer>
+                    <Card.Footer className="text-muted">{this.props.reduxState.genres.map(genre => <span key={genre.name}>{genre.name} </span>)}</Card.Footer>
                 </Card>
             </Container>
         </>
