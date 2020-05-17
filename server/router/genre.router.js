@@ -19,4 +19,29 @@ console.log (id);
     }) // End Catch
 }) // END GET Route
 
+router.post('/new/:id', (req,res)=>{
+    let queryText = `INSERT INTO "movie_genre" (movie_id, genre_id) VALUES ($1, $2);`; /* Still needs work */
+    console.log(req.body);
+        console.log('You have',req.body.movie_id, req.params.id);
+    pool.query(queryText, [req.body.movie_id, req.params.id])
+    .then((result)=> {
+        res.sendStatus(201)
+    }).catch((error)=>{
+        console.log(error)
+        res.sendStatus(500)
+    })
+})
+
+router.post('/delete/:id', (req,res)=>{
+    let queryText = `DELETE FROM "movie_genre" WHERE movie_id=$1 AND genre_id=$2;`; /* Still needs work */
+    console.log('You have',req.body.movie_id, req.body.genre);
+    pool.query(queryText, [req.body.movie_id, req.params.id])
+    .then((result)=> {
+        res.sendStatus(201)
+    }).catch((error)=>{
+        console.log(error)
+        res.sendStatus(500)
+    })
+})
+
 module.exports = router;

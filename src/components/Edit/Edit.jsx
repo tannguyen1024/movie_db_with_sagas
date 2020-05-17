@@ -5,7 +5,7 @@ import { Card, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
 class Edit extends Component {
-    state = { id: this.props.reduxState.clickedMovie.id, title: this.props.reduxState.clickedMovie.title, description: this.props.reduxState.clickedMovie.description, poster: this.props.reduxState.clickedMovie.poster }
+    state = { genre: '', movie_id: this.props.reduxState.clickedMovie.id, id: this.props.reduxState.clickedMovie.id, title: this.props.reduxState.clickedMovie.title, description: this.props.reduxState.clickedMovie.description, poster: this.props.reduxState.clickedMovie.poster }
 
     cancel = () => {
         this.props.history.push('/details')
@@ -38,8 +38,15 @@ class Edit extends Component {
         this.setState({ description: event.target.value })
     }
 
-    handleChange3 = (event) => {
-        console.log('Check is',event.target.checked)
+    handleChange3 = (event) => { /* Attempting to post to movie_genre junction table */
+        console.log('Check is', event.target.checked, event.target.value);
+         this.setState({ genre: Number(event.target.value) })
+        if (event.target.checked === true) {
+            this.props.dispatch({ type: "NEW_GENRE", payload: this.state })
+        }
+        if (event.target.checked === false) {
+            this.props.dispatch({ type:"DELETE_GENRE", payload: this.state })
+        }
     }
 
     handleSubmit = () => {
@@ -68,6 +75,7 @@ class Edit extends Component {
     }
 
     render() {
+        console.log('Sent', this.state, 'to server!')
         return (
             <>
                 <Container style={{ margin: "50px 25px 25px 25px" }}>
@@ -81,19 +89,19 @@ class Edit extends Component {
                             <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br />
                         </Card.Body>
                         <Card.Footer className="text-muted">
-                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange} defaultChecked={this.state.adventure} value="Adventure" color="primary" />} label="Adventure" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.animated} value="Animated" color="primary" />} label="Animated" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.biographical} value="Biographical" color="primary" />} label="Biographical" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.comedy} value="Comedy" color="primary" />} label="Comedy" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.disaster} value="Disaster" color="primary" />} label="Disaster" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.drama} value="Drama" color="primary" />} label="Drama" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.epic} value="Epic" color="primary" />} label="Epic" /><br />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.fantasy} value="Fantasy" color="primary" />} label="Fantasy" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.musical} value="Musical" color="primary" />} label="Musical" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.romantic} value="Romantic" color="primary" />} label="Romantic" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.science_fiction} value="Science Fiction" color="primary" />} label="Science Fiction" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.soap_opera} value="Soap Opera" color="primary" />} label="Soap Opera" />
-                            <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.superhero} value="Superhero" color="primary" />} label="Superhero" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.adventure} value={1} color="primary" />} label="Adventure" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.animated} value={2} color="primary" />} label="Animated" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.biographical} value={3} color="primary" />} label="Biographical" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.comedy} value={4} color="primary" />} label="Comedy" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.disaster} value={5} color="primary" />} label="Disaster" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.drama} value={6} color="primary" />} label="Drama" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.epic} value={7} color="primary" />} label="Epic" /><br />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.fantasy} value={8} color="primary" />} label="Fantasy" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.musical} value={9} color="primary" />} label="Musical" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.romantic} value={10} color="primary" />} label="Romantic" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.science_fiction} value={11} color="primary" />} label="Science Fiction" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.soap_opera} value={12} color="primary" />} label="Soap Opera" />
+                            <FormControlLabel control={<input type="checkbox" onChange={this.handleChange3} defaultChecked={this.state.superhero} value={13} color="primary" />} label="Superhero" />
                         </Card.Footer>
                     </Card>
                 </Container>

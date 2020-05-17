@@ -20,9 +20,29 @@ function* rootSaga() {
     yield takeEvery('EDIT_CLICK', editMovie); // RECEIVES the ONCHANGE information //
     yield takeEvery('POST_CLICK', postClick); // SAGAS with Initial Click of Movie
     // yield takeEvery('GET_CLICK', getClick); // SAGAS with componentDidMount of Details page
+    yield takeEvery('NEW_GENRE', newGenre); // SETS UP A NEW GENRE
+    yield takeEvery('DELETE_GENRE', deleteGenre); // DELETES A GENRE
 }
 
 // Additional generator function
+
+function* deleteGenre(action){
+    try {
+    yield axios.post(`/genres/delete/${action.payload.genre}`, action.payload)
+    }
+    catch(error){
+    console.log('Error in newGenre', error)
+    }
+}
+
+function* newGenre(action){
+    try {
+    yield axios.post(`/genres/new/${action.payload.genre}`, action.payload)
+    }
+    catch(error){
+    console.log('Error in newGenre', error)
+    }
+}
 
 function* fetchMovies() {
     try {
