@@ -45,14 +45,12 @@ class App extends Component {
       <MuiThemeProvider theme={myTheme}>
         <Route render={({ location }) => (
           <TransitionGroup>
-            <CSSTransition key={location.key} timeout={450} classNames="fade">
+            <CSSTransition key={location.key} timeout={250} classNames="fade">
 
               <Switch location={location}>
-                <Container>
                   <Route exact path="/" component={MovieList} />
                   <Route path="/details" component={Details} />
                   <Route path="/edit" component={Edit} />
-                </Container>
               </Switch>
 
             </CSSTransition>

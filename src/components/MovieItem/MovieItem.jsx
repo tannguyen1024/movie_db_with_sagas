@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 // import axios from 'axios'; /* No longer needed */
 
 // Bootstrap
-import { Container, Card } from 'react-bootstrap';
+import { Card, Row, Col, Container, Button } from 'react-bootstrap';
 
 class MovieItem extends Component {
 
@@ -14,17 +15,26 @@ class MovieItem extends Component {
         this.props.history.push('/details')
     }
 
-    render(){
+    render() {
         // console.log('MovieItem:',this.props.movies) /* No Longer Needed */
-        return(
-            <Card.Body onClick={this.handleClick}>
-                <Card.Img variant="left" src={this.props.movies.poster} />
-                    <td>{this.props.movies.title}</td>
-                    <td>{this.props.movies.description}</td>
-            </Card.Body>
+        return (
+            <>
+                <Container style={{margin: "50px 25px 25px 25px"}}>
+                    <Row>
+                        <Col md="auto" >
+                            <Card.Img src={this.props.movies.poster} style={{ boxShadow: "2px 2px 20px  #000000" }} />
+                        </Col>
+                        <Col>
+                            <Card style={{ boxShadow: "2px 2px 20px  #000000" }}>
+                                <Card.Header>{this.props.movies.title}<span style={{ float: "right" }}><Button variant="outline-dark" size="sm" onClick={this.handleClick}>Edit</Button></span></Card.Header>
+                                <Card>{this.props.movies.description}</Card>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </>
         )
     }
-
 }
 
 /* Choose one of the below*/
