@@ -15,48 +15,47 @@ import {BrowserRouter, Route} from "react-router-dom";
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchMovies); // Receives initial call from component with TYPE
-    yield takeEvery('SET_GENRE', fetchCurrentGenre); // Receives initial call from component with TYPE
-    yield takeEvery('EDIT_CLICK', editMovie); // Receives initial call from component with TYPE
-    yield takeEvery('POST_CLICK', postClick);
-    yield takeEvery('GET_CLICK', getClick);
+    yield takeEvery('FETCH_MOVIES', fetchMovies); // SAGAS to run MOVIE GET
+    yield takeEvery('SET_GENRE', fetchCurrentGenre); // SAGAS which sets the current genre from clicked item
+    yield takeEvery('EDIT_CLICK', editMovie); // RECEIVES the ONCHANGE information //
+    yield takeEvery('POST_CLICK', postClick); // SAGAS with Initial Click of Movie
+    yield takeEvery('GET_CLICK', getClick); // SAGAS with componentDidMount of Details page
 }
 
 // Additional generator function
-
-function* postClick(action){
-    try{
-        axios.post(`/click`, ({ data: action.payload }))
-        yield put({type: 'GET_CLICKED'})
-    }
-    catch (error){console.log(error)}
-} 
-
-function* getClick(action){
-    try{
-        let movie = action.payload;
-        const response = yield axios.get(`/click`);
-        yield put({type: 'GET_CLICKED', payload: response.data})
-    }
-    catch{}
-}
 
 function* fetchMovies() {
     try {
         const response = yield axios.get('/movies');
         // console.log('response of GET', response.data) /* No longer needed */
-        yield put({ type: 'SET_MOVIES', payload: response.data })
+        yield put({ type: 'SET_MOVIES', payload: response.data }) /* RUNS REDUCER TO RETURN REDUX STATE */
     }
     catch (error) {
         console.log('Error in fetchMovies', error)
     }
 }
 
+function* postClick(action){
+    try{
+        axios.post(`/click`, ({ data: action.payload })) /* AXIOS POST stores data in click table */
+        yield put({type: 'GET_CLICKED'}) /* AXIOS GET to retrieve data of clicked table from DATABASE */
+    }
+    catch (error){console.log(error)}
+} 
+
+function* getClick(action){ /* RUNS once componentDidMount of Details loads */
+    try{
+        const response = yield axios.get(`/click`);
+        yield put({type: 'SET_CLICKED', payload: response.data}) /* Sends response.data as payload to reducer */
+    }
+    catch{}
+}
+
 function* fetchCurrentGenre(action) {
     let id = action.payload;
     try {
-        const response = yield axios.get(`/genres/${id}`);
-        yield put({ type: 'UPDATE_GENRES', payload: response.data });
+        const response = yield axios.get(`/genres/${id}`); /* Performs a special JOIN select that will utilize our junction table to gather the genres of the movie */
+        yield put({ type: 'UPDATE_GENRES', payload: response.data }); /* Comes back to reducer genres */
     }
     catch (error) {
         console.log('Error in fetchCurrentGenre', error)
@@ -82,7 +81,7 @@ const sagaMiddleware = createSagaMiddleware();
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
-            return action.payload;
+            return action.payload; /* SENDS RESULT.ROWS BACK AS ARRAY TO REDUXSTATE.MOVIES */
         default:
             return state;
     }
@@ -92,7 +91,7 @@ const movies = (state = [], action) => {
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'UPDATE_GENRES':
-            return action.payload;
+            return action.payload; /* Sends the genre for the current movie back as reduxState.genres */
         default:
             return state;
     }
@@ -100,15 +99,15 @@ const genres = (state = [], action) => {
 
 // Reducers
 const clickedMovie = (state = [], action) => {
-    if (action.type === 'CLICK_MOVIE') {
+    if (action.type === 'STORE_CLICK') {
         return action.payload;
     }
     else { return state }
 }
 
-const clickedMovie2 = (state =[], action) =>{
-    if(action.type === 'GET_CLICKED'){
-        return action.payload;
+const clickedMovie2 = (state = [], action) =>{
+    if(action.type === 'SET_CLICKED'){
+        return action.payload; /* Passes clicked database result.rows back as reduxState.clickedMovie2 */
     }
     else{return state}
 }

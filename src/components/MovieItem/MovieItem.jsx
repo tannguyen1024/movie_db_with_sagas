@@ -5,9 +5,9 @@ import axios from 'axios';
 class MovieItem extends Component {
 
     handleClick = () => {
-        this.props.dispatch({type: 'POST_CLICK', payload:this.props.movies})
-        // this.props.dispatch({type: 'GET_CLICK', payload: this.props.movies})
-        this.props.dispatch({ type: 'SET_GENRE', payload: this.props.movies.id })
+        this.props.dispatch({type: 'POST_CLICK', payload:this.props.movies}) /* Posts ALL the information about the movie to DATABASE for POST */
+        this.props.dispatch({ type: 'STORE_CLICK', payload: this.props.movies }) /* Posts ALL the information about the movie to reducer for ALTERNATE method of DETAILS */
+        this.props.dispatch({ type: 'SET_GENRE', payload: this.props.movies.id }) /* Sets the current genre for the clicked item in reducer */
         this.props.history.push('/details')
     }
 

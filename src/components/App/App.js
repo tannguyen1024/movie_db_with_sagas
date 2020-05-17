@@ -11,23 +11,19 @@ import Edit from '../Edit/Edit'
 
 class App extends Component {
 
-  clickRedux = () => { /* Button to perform check of the current redux State */
-    console.log('reduxState is:', this.props.reduxState);
-  }
+  // clickRedux = () => { /* Button to perform check of the current redux State */
+  //   console.log('reduxState is:', this.props.reduxState);
+  // }
 
   componentDidMount() {
     console.log('Application has mounted.')
     this.props.dispatch({ type: 'FETCH_MOVIES' })
-    // this.props.dispatch({ type: 'FETCH_GENRES' })
   }
 
   // Renders the entire app on the DOM
   render() {
     return (
       <div>
-        {/* <header className="App-header">
-          <button onClick={this.clickRedux}>Check Redux State</button><br />
-        </header> */}
           <Route render={({location}) => (
             <TransitionGroup>
             <CSSTransition key={location.key} timeout={450} classNames="fade">

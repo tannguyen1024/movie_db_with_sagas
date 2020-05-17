@@ -7,7 +7,7 @@ class MovieList extends Component {
     render() {
         return (
             <div className="page">
-                <tbody><tr><td>MovieList</td></tr></tbody>
+                <h1>Magical Movie List</h1>
                 {/* MAP MOVIES HERE */}
                 {this.props.reduxState.movies.map(movies =>
                     <tbody key={movies.id}><MovieItem movies={movies} history={this.props.history}/></tbody>

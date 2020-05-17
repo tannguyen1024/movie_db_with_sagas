@@ -6,17 +6,16 @@ import axios from 'axios';
 class Details extends Component {
 
     componentDidMount = () => {
-        this.props.dispatch({ type: 'GET_CLICK' })
+        this.props.dispatch({ type: 'GET_CLICK' }) /* DETAILS page loads componentDidMount and GRABS data from DATABASE from Server.JS */
     }
 
     handleClick = () => {
-        this.props.dispatch({ type: 'GET_CLICK' })
-        this.props.history.push('/edit')
+        this.props.history.push('/edit') /* Utilizes React Router to transition to edit page */
     }
 
     home = () => {
-        axios.delete(`/click`);
-        this.props.history.push('/');
+        axios.delete(`/click`); /* Deletes the entire DETAILS database */
+        this.props.history.push('/'); /* Utilizes React Router to transition to home page */
     }
 
     render() {
