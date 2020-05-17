@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, TextField, FormControlLabel } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import axios from 'axios';
 
 class Edit extends Component {
@@ -11,7 +12,7 @@ class Edit extends Component {
     }
 
     componentDidMount = () => {
-        for (let i = 0; i < this.props.reduxState.genres.length; i++) {     /* This did not work for setting defaultChecked, ideally I would have had the checkmaraks pre-checked */
+        for (let i = 0; i < this.props.reduxState.genres.length; i++) {
             const name = this.props.reduxState.genres[i];
             if (name.name === "Adventure") { this.setState({ ...this.state, adventure: true }) }
             else if (name.name === "Animated") { this.setState({ ...this.state, animated: true }) }
@@ -38,22 +39,23 @@ class Edit extends Component {
     }
 
     handleSubmit = () => {
-        console.log('Submitting State:', this.state)
-        axios.delete(`/click`) /* Deletes the entire DETAILS database */
+        // console.log('Submitting State:', this.state)
+        // axios.delete(`/click`) /* Deletes the entire DETAILS database */  /* No longer used due to issues with page not loading properly */
         this.props.dispatch({ type: 'EDIT_CLICK', payload: this.state }) /* Pushes up the current state to SAGAS */
-        this.props.dispatch({ type: 'STORE_CLICK', payload: this.state }) 
-        this.props.history.push('/details')
+        this.props.dispatch({ type: 'STORE_CLICK', payload: this.state }) /* Store our item in reducer for DETAILS later*/
+        this.props.history.push('/details') /* Utilizes BrowserRouter to navigate to the details page */
     }
 
     render() {
-        console.log(this.state.animated)
         return (
             <>
+            <Container maxWidth="sm">
                 <Button color="primary" variant="contained" onClick={this.cancel}>Cancel Changes</Button> <Button color="secondary" variant="contained" onClick={this.handleSubmit}>Submit Changes</Button><br/>
                 <p><Input onChange={this.handleChange} type="text" variant="contained" color="secondary" fullWidth={false} multiline={true} width="520" placeholder="Movie Name" defaultValue={this.props.reduxState.clickedMovie.title} /></p>
                 <TextField onChange={this.handleChange2} type="text" variant="outlined" fullWidth={true} multiline={true} placeholder="Movie Description" defaultValue={this.props.reduxState.clickedMovie.description} /><br />
 
                 <h5>Genre</h5>
+                
                 <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.adventure} value="Adventure" color="primary" />} label="Adventure" />
                 <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.animated}  value="Animated" color="primary" />} label="Animated" />
                 <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.biographical} value="Biographical" color="primary" />} label="Biographical" />
@@ -67,11 +69,12 @@ class Edit extends Component {
                 <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.science_fiction} value="Science Fiction" color="primary" />} label="Science Fiction" />
                 <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.soap_opera} value="Soap Opera" color="primary" />} label="Soap Opera" />
                 <FormControlLabel control={<input type="checkbox" defaultChecked={this.state.superhero} value="Superhero" color="primary" />} label="Superhero" />
+            
                 <br />
+                </Container>
             </>
         )
     }
-
 }
 
 /* Choose one of the below*/
