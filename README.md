@@ -16,14 +16,22 @@ This weekend project required me to create a full stack movie database that util
 
 ## Pictures of the Completed Project:
 
-The Components:
-- The home page contains a list of all the movies, genres associated with that movie (obtained using a junction table), and utilizes transition effects to smoothly fade between pages.
+**The Components:**
+
+- The *home page* contains a list of all the movies, genres associated with that movie (obtained using a junction table), and utilizes transition effects to smoothly fade between pages.
+
 ![Home Page](example/home.png)
-- The details page focuses on one item of your choosing and displays all relevant information.
+
+- The *details page* focuses on one item of your choosing and displays all relevant information.
+
 ![Details](example/details.png)
-- You are able to modify the details of the movie.  Note that fields are pre-filled with the existing data.
+
+- The *edit page* allows you to to modify the movie's title and description.  Note that the fields are pre-filled with the existing title, description, and genre.
+
 ![Edit](example/edit.png)
+
 - A confirmation windows appears once you press Submit Changes.
+
 ![Confirmation](example/confirmation.png)
 
 ## Project Notes
