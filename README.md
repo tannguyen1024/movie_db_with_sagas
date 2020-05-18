@@ -14,6 +14,10 @@
 
 This weekend project required me to create a full stack movie database that utilized saga middleware.  Information is gathered using dispatches in Redux and redistributed among the other components.  Material UI, Bootstrap and SweetAlert2 was utilized to improve the aesthetics of the application.  Axios requests allowed the page to work with the SQL database to store the feedback.  Users have the ability to click for additional details and edit movies as well.
 
+## Video of the Completed Project:
+
+[![Video](example/youtube.png)](https://youtu.be/E-_Uy9i_aJc)
+
 ## Pictures of the Completed Project:
 
 **The Components:**
